@@ -49,7 +49,15 @@ for host in localhost "${HOSTNAME}"; do
   printf "%-66s %s" "curl http://${USER}:${PASSWD}@${host}:8080/ -I -X GET" "-> "
   curl -s http://${USER}:${PASSWD}@${host}:8080/ -I -X GET | head -1
 done
+
 sep
+echo "URLs:" 
+for host in localhost "${HOSTNAME}"; do
+cat <<EOF
+  - http://${USER}:${PASSWD}@${host}:8080/
+  - http://${USER}:${PASSWD}@${host}:8080/?action=stream 
+  - http://${USER}:${PASSWD}@${host}:8080/?action=snapshot
+EOF
+done
 
-
-
+sep
